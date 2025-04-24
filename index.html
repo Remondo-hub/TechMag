@@ -1,1060 +1,363 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Automation and instrumentation solutions for industry: design, supply, installation, training, and maintenance.">
-    <meta name="keywords" content="automation, instrumentation, PLC, SCADA, IEC 61131, maintenance, training, industry">
-    <meta name="author" content="AutoTech Solutions">
-    <title>AutoTech Solutions - Expert in Automation & Instrumentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>TechMag</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333333;
-            background: #F5F5F5;
-        }
-        header {
-            background: #0A1F44;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 4em 1em;
-            min-height: 60vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
         }
-        header h1 { font-size: 2.5em; margin-bottom: 0.5em; }
-        header p { font-size: 1.2em; margin-bottom: 1em; }
-        header a {
-            background: #00B2FF;
-            color: #FFFFFF;
-            padding: 0.75em 1.5em;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s, transform 0.3s;
-        }
-        header a:hover { background: #FF8C00; transform: scale(1.05); }
         nav {
-            background: #0A1F44;
-            padding: 1em;
+            background-color: #333;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
         }
-        .nav-item {
-            position: relative;
-        }
-        .language-toggle {
-            position: absolute;
-            right: 1em;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .language-toggle button {
-            padding: 0.5em 1em;
-            font-size: 1em;
-            border-radius: 4px;
-            border: none;
-            background: #FFFFFF;
-            color: #0A1F44;
-            cursor: pointer;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5em; /* Espacement entre l’icône et le texte */
-        }
-        .language-toggle button i {
-            font-size: 1.2em; /* Taille de l’icône */
-        }
-        .language-toggle button:hover {
-            background: #00B2FF;
-            color: #FFFFFF;
-        }
-        .language-toggle button:hover i {
-            color: #FFFFFF; /* L’icône change de couleur au survol */
-        }
-        .language-toggle button:focus {
-            outline: 2px solid #00B2FF;
-            outline-offset: 2px;
-        }
-        nav a, .dropdown a {
-            color: #FFFFFF;
+        nav a {
+            color: white;
+            margin: 0 1rem;
             text-decoration: none;
-            margin: 0 1.5em;
-            font-weight: bold;
-            position: relative;
+            font-size: 1.2rem;
         }
-        nav a i { margin-right: 0.5em; }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: #00B2FF;
-            transition: width 0.3s;
+        nav a:hover {
+            color: #ddd;
         }
-        nav a:hover { color: #00B2FF; }
-        nav a:hover::after { width: 100%; }
-        .dropdown {
+        .page {
             display: none;
-            position: absolute;
-            background: #0A1F44;
-            min-width: 200px;
-            z-index: 101;
-            top: 100%;
-            left: 0;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .nav-item:hover .dropdown { display: block; }
-        .nav-item[aria-expanded="true"] .dropdown { display: block; }
-        .dropdown a {
-            display: block;
-            padding: 0.5em 1em;
-            margin: 0;
-            transition: background 0.3s, color 0.3s;
-        }
-        .dropdown a:hover {
-            color: #00B2FF;
-            background: #FF8C00;
-        }
-        .dropdown-item.active {
-            color: #28A745;
-        }
-        .dropdown-item.active::after {
-            width: 100%;
-            background: #28A745;
-        }
-        section {
-            padding: 2em;
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #FFFFFF;
+            padding: 2rem;
+            max-width: 1200px;
+            background-color: white;
             border-radius: 8px;
+            margin: 2rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 2em;
         }
-        #services {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 3em;
-        }
-        h2 {
-            color: #0A1F44;
-            margin-bottom: 1em;
-            text-transform: uppercase;
-        }
-        h3 {
-            color: #0A1F44;
-            margin-top: 1em;
-            transition: transform 0.3s, color 0.3s;
-        }
-        h3:hover {
-            transform: translateY(-5px);
-            color: #FFC300;
-        }
-        .selected-service-container {
-            display: none;
-            flex-direction: column;
-            gap: 1.5em;
-            margin-top: 2em;
-            width: 100%;
-            max-width: 1000px;
-            align-items: center;
-        }
-        .selected-service-container.active {
-            display: flex;
-        }
-        .selected-service-container .service-card {
-            width: 100%;
-            max-width: 700px;
-        }
-        .selected-service-container .services-content {
-            width: 100%;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1em;
-            max-width: 600px;
-            margin: 0 auto 2em auto;
-        }
-        .service-card {
-            background: #0A1F44;
-            padding: 0.5em;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s, background 0.3s, width 0.3s ease;
-            animation: fadeInUp 0.5s ease-out;
-            animation-fill-mode: both;
-            cursor: pointer;
-            width: 100%;
-        }
-        .service-card:focus {
-            outline: 2px solid #00B2FF;
-            outline-offset: 2px;
-        }
-        .service-card i {
-            font-size: 1.5em;
-            margin-bottom: 0.3em;
-            color: #FFFFFF;
-            transition: transform 0.3s;
-        }
-        .service-card h3 {
-            color: #FFFFFF;
-            font-size: 1em;
-            margin-bottom: 0.3em;
-        }
-        .service-card p {
-            color: #FFFFFF;
-            font-size: 0.8em;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            background: #FF8C00;
-            box-shadow: 0 4px 12px rgba(255,195,0,0.3);
-        }
-        .service-card:hover i {
-            transform: rotate(360deg);
-        }
-        .service-card.active {
-            background: #FF8C00;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateY(-5px);
-        }
-        .service-card:nth-child(1) { animation-delay: 0.1s; }
-        .service-card:nth-child(2) { animation-delay: 0.2s; }
-        .service-card:nth-child(3) { animation-delay: 0.3s; }
-        .service-card:nth-child(4) { animation-delay: 0.4s; }
-        .service-card:nth-child(5) { animation-delay: 0.5s; }
-        .last-card {
-            grid-column: span 2;
-            justify-self: center;
-            width: 50%;
-        }
-        .services-content {
-            display: none;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-            padding: 1em 0;
-        }
-        .services-content.active {
+        .active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
-        .services-content .services-grid {
-            display: flex;
-            flex-direction: row;
-            justify-content: center; /* Centrer les sous-services */
-            overflow-x: auto;
-            gap: 1em;
-            max-width: none;
-            margin: 0;
-            padding: 0.5em 0;
-        }
-        .services-content .services-grid::-webkit-scrollbar {
-            height: 8px;
-        }
-        .services-content .services-grid::-webkit-scrollbar-thumb {
-            background: #00B2FF;
-            border-radius: 4px;
-        }
-        .services-content .services-grid::-webkit-scrollbar-track {
-            background: #F5F5F5;
-        }
-        .service {
-            background: #FFFFFF;
-            border: 1px solid #F5F5F5;
-            padding: 1em;
+        .product-img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem auto;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: slideUp 0.5s ease-out;
-            cursor: pointer;
-            flex: 0 0 250px;
-        }
-        .service:focus {
-            outline: 2px solid #00B2FF;
-            outline-offset: 2px;
-        }
-        .service:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255,195,0,0.3);
-        }
-        .service i {
-            color: #00B2FF;
-            font-size: 2em;
-            margin-bottom: 0.5em;
-            transition: color 0.3s;
-        }
-        .service:hover i { color: #FFC300; }
-        .service p {
-            color: #333333;
-            font-size: 0.9em;
-            margin-top: 0.5em;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: #FFFFFF;
-            padding: 1.5em;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            max-width: 90%;
-            width: 450px;
-            opacity: 0;
-            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-        }
-        .modal.active {
             display: block;
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-        }
-        .modal h4 {
-            color: #0A1F44;
-            margin-bottom: 1em;
-            font-size: 1.2em;
-        }
-        .modal p {
-            color: #333333;
-            font-size: 0.9em;
-        }
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-            color: #0A1F44;
-        }
-        .modal-close:focus {
-            outline: 2px solid #00B2FF;
-            outline-offset: 2px;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
-        .overlay.active {
-            display: block;
-            opacity: 1;
-        }
-        .industries-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1em;
-            margin-top: 1em;
-        }
-        .industry-card {
-            background: #F5F5F5;
-            padding: 1em;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s, background 0.3s, color 0.3s;
-            animation: fadeInUp 0.5s ease-out;
-            animation-fill-mode: both;
-        }
-        .industry-card i {
-            font-size: 1.5em;
-            color: #0A1F44;
-            margin-bottom: 0.5em;
-            transition: transform 0.3s, color 0.3s;
-        }
-        .industry-card p {
-            margin: 0;
-            color: #333333;
-        }
-        .industry-card:hover {
-            transform: translateY(-5px);
-            background: #00B2FF;
-            color: #FFFFFF;
-            box-shadow: 0 4px 12px rgba(255,195,0,0.3);
-        }
-        .industry-card:hover i {
-            color: #FFFFFF;
-            transform: rotate(360deg);
-        }
-        .industry-card:nth-child(1) { animation-delay: 0.1s; }
-        .industry-card:nth-child(2) { animation-delay: 0.2s; }
-        .industry-card:nth-child(3) { animation-delay: 0.3s; }
-        .industry-card:nth-child(4) { animation-delay: 0.4s; }
-        .industry-card:nth-child(5) { animation-delay: 0.5s; }
-        .industry-card:nth-child(6) { animation-delay: 0.6s; }
-        .industry-card:nth-child(7) { animation-delay: 0.7s; }
-        .industry-card:nth-child(8) { animation-delay: 0.8s; }
-        footer {
-            background: #0A1F44;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 1em;
-        }
-        .contact a {
-            color: #00B2FF;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .contact a:hover { color: #FF8C00; }
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes rotateIcon {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8em; }
-            nav { flex-direction: column; align-items: center; }
-            .nav-item { width: 100%; }
-            nav a { display: block; margin: 0.5em 0; }
-            .dropdown {
-                position: static;
-                display: none;
-                background: #0A1F44;
-                width: 100%;
-            }
-            .nav-item:hover .dropdown { display: block; }
-            .nav-item[aria-expanded="true"] .dropdown { display: block; }
-            .dropdown a { padding: 0.5em 1em; }
-            .services-grid { grid-template-columns: 1fr; max-width: 100%; }
-            .service-card { width: 80%; margin: 0 auto; }
-            .last-card { grid-column: auto; width: 80%; }
-            .services-content .services-grid { padding: 0.5em; }
-            .service { flex: 0 0 200px; }
-            .industries-grid { grid-template-columns: repeat(2, 1fr); }
-            #services {
-                min-height: auto;
-                justify-content: flex-start;
-                padding: 2em;
-            }
-            .modal {
-                width: 90%;
-                padding: 1.2em;
-            }
-            .language-toggle {
-                position: static;
-                margin-top: 1em;
-                transform: none;
-            }
-            .language-toggle button {
-                width: 100%;
-                max-width: 200px;
-            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>AutoTech Solutions</h1>
-        <p>Your solutions for industry: supply, installation, training, maintenance</p>
-        <a href="#services" aria-label="Discover automation and instrumentation services">Discover my services</a>
-    </header>
-    <nav role="navigation" aria-label="Main menu">
-        <div class="nav-item" aria-haspopup="true" aria-expanded="false">
-            <a href="#home" aria-label="Go to Home section"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
-        </div>
-        <div class="nav-item" aria-haspopup="true" aria-expanded="false">
-            <a href="#services" aria-label="Go to Services section"><i class="fas fa-tools" aria-hidden="true"></i> Services</a>
-            <div class="dropdown">
-                <a href="#etude-solution" class="dropdown-item active" data-tab="etude-solution">Study and Solution</a>
-                <a href="#fournitures" class="dropdown-item" data-tab="fournitures">Supplies and Equipment</a>
-                <a href="#installation" class="dropdown-item" data-tab="installation">Installation, Testing, and Commissioning</a>
-                <a href="#formation" class="dropdown-item" data-tab="formation">Training and Education</a>
-                <a href="#maintenance" class="dropdown-item" data-tab="maintenance">Maintenance</a>
-            </div>
-        </div>
-        <div class="nav-item" aria-haspopup="true" aria-expanded="false">
-            <a href="#about" aria-label="Go to About section"><i class="fas fa-user" aria-hidden="true"></i> About</a>
-            <div class="dropdown">
-                <a href="#qui-nous-sommes">Who We Are</a>
-                <a href="#industries">Industries We Serve</a>
-            </div>
-        </div>
-        <div class="nav-item" aria-haspopup="true" aria-expanded="false">
-            <a href="#contact" aria-label="Go to Contact section"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
-        </div>
-        <div class="language-toggle">
-            <button id="language-toggle" aria-label="Switch to French language">
-                <i class="fas fa-globe" aria-hidden="true"></i> Français
-            </button>
-        </div>
+    <nav>
+        <a href="#" onclick="showPage('home')">Accueil</a>
+        <a href="#" onclick="showPage('shop')">Boutique</a>
+        <a href="#" onclick="scrollToExample('magazine')">Magazine</a>
+        <a href="#" onclick="scrollToExample('recharge')">Rechargement</a>
+        <a href="#" onclick="scrollToExample('contact')">Contact</a>
     </nav>
-    <section id="home">
-        <h2>Home</h2>
-        <p>Passionate automation engineer, I offer comprehensive solutions for industry: from equipment supply to commissioning, including training and maintenance. Click below to explore my services.</p>
-    </section>
-    <section id="services">
-        <h2>Services</h2>
-        <div class="services-grid" id="services-grid">
-            <div class="service-card active" data-tab="etude-solution" role="button" tabindex="0">
-                <i class="fas fa-hammer" aria-hidden="true"></i>
-                <h3>Study and Solution</h3>
-                <p>Design, programming, and optimization.</p>
+
+    <div id="home" class="page active">
+        <!-- Section Accueil -->
+        <section id="home" class="py-16 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-4">Bienvenue chez TechMag</h2>
+                <p class="text-lg mb-6">Votre source pour les dernières nouveautés en téléphonie, accessoires et abonnements.</p>
+                <a href="#" onclick="showPage('shop')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Découvrir la boutique</a>
             </div>
-            <div class="service-card" data-tab="fournitures" role="button" tabindex="0">
-                <i class="fas fa-box" aria-hidden="true"></i>
-                <h3>Supplies and Equipment</h3>
-                <p>Industrial equipment and software.</p>
+        </section>
+
+        <!-- Section Magazine -->
+        <section id="magazine" class="py-16 bg-gray-100">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Articles du Magazine</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Test de l'iPhone 16</h3>
+                        <p>Découvrez notre avis sur le dernier smartphone d'Apple.</p>
+                        <a href="#" class="text-blue-600 hover:underline">Lire plus</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Top 5 des accessoires 2025</h3>
+                        <p>Les meilleurs accessoires pour votre téléphone.</p>
+                        <a href="#" class="text-blue-600 hover:underline">Lire plus</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-2">Android vs iOS</h3>
+                        <p>Quel système choisir en 2025 ?</p>
+                        <a href="#" class="text-blue-600 hover:underline">Lire plus</a>
+                    </div>
+                </div>
             </div>
-            <div class="service-card" data-tab="installation" role="button" tabindex="0">
-                <i class="fas fa-tools" aria-hidden="true"></i>
-                <h3>Installation and Commissioning</h3>
-                <p>Setup and validation.</p>
+        </section>
+
+        <!-- Section Rechargement -->
+        <section id="recharge" class="py-16 bg-gray-100">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Rechargement d'Abonnements</h2>
+                <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <label for="operator" class="block text-lg font-medium mb-2">Opérateur</label>
+                    <select id="operator" class="w-full p-2 border rounded mb-4">
+                        <option value="orange">Orange Mobicarte</option>
+                        <option value="sfr">SFR</option>
+                        <option value="bouygues">Bouygues</option>
+                    </select>
+                    <label for="amount" class="block text-lg font-medium mb-2">Montant (€)</label>
+                    <input type="number" id="amount" class="w-full p-2 border rounded mb-4" placeholder="Ex. 10">
+                    <label for="phone" class="block text-lg font-medium mb-2">Numéro de téléphone</label>
+                    <input type="tel" id="phone" class="w-full p-2 border rounded mb-4" placeholder="Ex. 06 12 34 56 78">
+                    <button onclick="recharge()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full">Recharger</button>
+                </div>
             </div>
-            <div class="service-card" data-tab="formation" role="button" tabindex="0">
-                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                <h3>Training and Education</h3>
-                <p>Training for operators and engineers.</p>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="py-16 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Contactez-nous</h2>
+                <div class="max-w-md mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+                    <label for="name" class="block text-lg font-medium mb-2">Nom</label>
+                    <input type="text" id="name" class="w-full p-2 border rounded mb-4" placeholder="Votre nom">
+                    <label for="email" class="block text-lg font-medium mb-2">Email</label>
+                    <input type="email" id="email" class="w-full p-2 border rounded mb-4" placeholder="Votre email">
+                    <label for="message" class="block text-lg font-medium mb-2">Message</label>
+                    <textarea id="message" class="w-full p-2 border rounded mb-4" placeholder="Votre message"></textarea>
+                    <button onclick="sendMessage()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full">Envoyer</button>
+                </div>
             </div>
-            <div class="service-card last-card" data-tab="maintenance" role="button" tabindex="0">
-                <i class="fas fa-wrench" aria-hidden="true"></i>
-                <h3>Maintenance</h3>
-                <p>Servicing and calibration.</p>
-            </div>
-        </div>
-        <div class="selected-service-container" id="selected-service-container">
-            <!-- The selected card and its sub-services will be inserted here dynamically -->
-        </div>
-    </section>
-    <section id="about">
-        <h2>About</h2>
-        <h3 id="qui-nous-sommes">Who We Are</h3>
-        <p>We are a company specializing in automation and instrumentation solutions for industry. We offer comprehensive services ranging from design and programming to commissioning, maintenance, and training, with a focus on innovation and reliability.</p>
-        <h3 id="industries">Industries We Serve</h3>
-        <div class="industries-grid">
-            <div class="industry-card">
-                <i class="fas fa-oil-can" aria-hidden="true"></i>
-                <p>Oil and Gas</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-bolt" aria-hidden="true"></i>
-                <p>Energy (electricity, renewables)</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-car" aria-hidden="true"></i>
-                <p>Automotive</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-utensils" aria-hidden="true"></i>
-                <p>Agrofood</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-capsules" aria-hidden="true"></i>
-                <p>Pharmaceutical</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-industry" aria-hidden="true"></i>
-                <p>Industrial Manufacturing</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-hammer" aria-hidden="true"></i>
-                <p>Metal Industry</p>
-            </div>
-            <div class="industry-card">
-                <i class="fas fa-robot" aria-hidden="true"></i>
-                <p>Robotics</p>
-            </div>
-        </div>
-    </section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Contact me: <a href="mailto:your.email@example.com" aria-label="Send an email to AutoTech Solutions">your.email@example.com</a></p>
-        <p>Phone: <a href="tel:+336XXXXXXXX" aria-label="Call AutoTech Solutions at +33 6 XX XX XX XX">+33 6 XX XX XX XX</a></p>
-        <p>Or via <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="Visit AutoTech Solutions’ LinkedIn profile">LinkedIn</a></p>
-    </section>
-    <footer>
-        <p>© 2025 - AutoTech Solutions</p>
-    </footer>
-    <div class="overlay" id="overlay" tabindex="-1"></div>
-    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-        <h4 id="modal-title"></h4>
-        <p id="modal-content"></p>
-        <button class="modal-close" aria-label="Close the modal">×</button>
+        </section>
     </div>
+
+    <div id="shop" class="page">
+        <!-- Section Boutique -->
+        <section id="shop" class="py-16 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-8">Boutique</h2>
+                
+                <!-- Filtres -->
+                <div class="mb-8 flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <label for="category" class="mr-2">Catégorie :</label>
+                        <select id="category" onchange="filterProducts()" class="p-2 border rounded">
+                            <option value="all">Tous</option>
+                            <option value="smartphone">Smartphones</option>
+                            <option value="accessory">Accessoires</option>
+                            <option value="subscription">Abonnements</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="price" class="mr-2">Trier par prix :</label>
+                        <select id="price" onchange="filterProducts()" class="p-2 border rounded">
+                            <option value="default">Défaut</option>
+                            <option value="low-to-high">Prix croissant</option>
+                            <option value="high-to-low">Prix décroissant</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Liste des produits -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-list">
+                    <!-- Smartphones -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="smartphone" data-price="599.99">
+                        <img src="https://via.placeholder.com/200x150?text=Samsung+Galaxy+S25" alt="Samsung Galaxy S25" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Samsung Galaxy S25</h3>
+                        <p class="mb-2">599,99 €</p>
+                        <button onclick="addToCart('Samsung Galaxy S25', 599.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="smartphone" data-price="799.99">
+                        <img src="https://via.placeholder.com/200x150?text=iPhone+16" alt="iPhone 16" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">iPhone 16</h3>
+                        <p class="mb-2">799,99 €</p>
+                        <button onclick="addToCart('iPhone 16', 799.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="smartphone" data-price="499.99">
+                        <img src="https://via.placeholder.com/200x150?text=Google+Pixel+9" alt="Google Pixel 9" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Google Pixel 9</h3>
+                        <p class="mb-2">499,99 €</p>
+                        <button onclick="addToCart('Google Pixel 9', 499.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="smartphone" data-price="649.99">
+                        <img src="https://via.placeholder.com/200x150?text=Xiaomi+14" alt="Xiaomi 14" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Xiaomi 14</h3>
+                        <p class="mb-2">649,99 €</p>
+                        <button onclick="addToCart('Xiaomi 14', 649.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <!-- Accessoires -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="accessory" data-price="19.99">
+                        <img src="https://via.placeholder.com/200x150?text=Coque+iPhone+16" alt="Coque iPhone 16" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Coque iPhone 16</h3>
+                        <p class="mb-2">19,99 €</p>
+                        <button onclick="addToCart('Coque iPhone 16', 19.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="accessory" data-price="24.99">
+                        <img src="https://via.placeholder.com/200x150?text=Chargeur+USB-C" alt="Chargeur USB-C" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Chargeur USB-C</h3>
+                        <p class="mb-2">24,99 €</p>
+                        <button onclick="addToCart('Chargeur USB-C', 24.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="accessory" data-price="59.99">
+                        <img src="https://via.placeholder.com/200x150?text=AirPods+Pro" alt="AirPods Pro" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">AirPods Pro</h3>
+                        <p class="mb-2">59,99 €</p>
+                        <button onclick="addToCart('AirPods Pro', 59.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="accessory" data-price="29.99">
+                        <img src="https://via.placeholder.com/200x150?text=Câble+Lightning" alt="Câble Lightning" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Câble Lightning</h3>
+                        <p class="mb-2">29,99 €</p>
+                        <button onclick="addToCart('Câble Lightning', 29.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <!-- Abonnements -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="subscription" data-price="29.99">
+                        <img src="https://via.placeholder.com/200x150?text=Abonnement+Orange" alt="Abonnement Orange" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Abonnement Orange 50Go</h3>
+                        <p class="mb-2">29,99 €/mois</p>
+                        <button onclick="addToCart('Abonnement Orange 50Go', 29.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="subscription" data-price="39.99">
+                        <img src="https://via.placeholder.com/200x150?text=Abonnement+SFR" alt="Abonnement SFR" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Abonnement SFR 100Go</h3>
+                        <p class="mb-2">39,99 €/mois</p>
+                        <button onclick="addToCart('Abonnement SFR 100Go', 39.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center product" data-category="subscription" data-price="19.99">
+                        <img src="https://via.placeholder.com/200x150?text=Abonnement+Bouygues" alt="Abonnement Bouygues" class="product-img">
+                        <h3 class="text-xl font-semibold mb-2">Abonnement Bouygues 20Go</h3>
+                        <p class="mb-2">19,99 €/mois</p>
+                        <button onclick="addToCart('Abonnement Bouygues 20Go', 19.99)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                    </div>
+                </div>
+
+                <!-- Panier -->
+                <div class="mt-8 bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-center mb-4">Panier</h3>
+                    <ul id="cart" class="mb-4"></ul>
+                    <p id="total" class="text-lg font-bold text-center">Total : 0,00 €</p>
+                    <button onclick="checkout()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 w-full mt-4">Finaliser la commande</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="bg-blue-600 text-white p-4 text-center w-full">
+        <p>© 2025 TechMag. Tous droits réservés.</p>
+    </footer>
+
     <script>
-        // Données des sous-services (en anglais)
-        const subServicesData = {
-            'etude-solution': [
-                {
-                    icon: 'fas fa-drafting-compass',
-                    title: 'Electrical Design & Schematics',
-                    description: 'Technical studies, panel design + electrical schematics compliant with industry standards.',
-                    details: 'Needs analysis, detailed schematics creation with software like AutoCAD, IEC standards compliance, and client validation.'
-                },
-                {
-                    icon: 'fas fa-code',
-                    title: 'Programming & Integration',
-                    description: 'Development of automated systems (PLC, SCADA, DCS...), control logic, and field equipment integration.',
-                    details: 'Programming on Siemens, Rockwell, or Schneider, integration of sensors and actuators, control logic testing, and implementation of protocols like Modbus or OPC.'
-                },
-                {
-                    icon: 'fas fa-chart-line',
-                    title: 'Optimization & Documentation',
-                    description: 'Performance optimization (PID, logic), cable layouts, and technical documentation development.',
-                    details: 'PID loop tuning, cycle time optimization, detailed technical manuals, and wiring plans for simplified maintenance.'
-                }
-            ],
-            'fournitures': [
-                {
-                    icon: 'fas fa-boxes',
-                    title: 'Supply of Equipment and Software',
-                    description: 'Supply of programmable logic controllers (PLC), SCADA software, and industrial components compliant with IEC 61131-3 standards.',
-                    details: 'Selection of equipment from certified suppliers (Siemens, Rockwell), fast delivery, and guaranteed compatibility with your existing systems.'
-                },
-                {
-                    icon: 'fas fa-charging-station',
-                    title: 'Supply of Panels According to Standards',
-                    description: 'Delivery of certified electrical panels for industrial applications, meeting safety and quality standards.',
-                    details: 'Custom-assembled panels, IP65 certified, with compliance testing before delivery, and full documentation.'
-                },
-                {
-                    icon: 'fas fa-tachometer-alt',
-                    title: 'Supply of Process Instruments',
-                    description: 'Sensors, transmitters, and actuators for industrial process measurement and control.',
-                    details: 'Supply of pressure, temperature, and flow sensors, 4-20mA transmitters, and pneumatic or electric actuators.'
-                }
-            ],
-            'installation': [
-                {
-                    icon: 'fas fa-plug',
-                    title: 'Installation & Supervision',
-                    description: 'Setup, testing, and supervision of panels, equipment, and wiring according to standards.',
-                    details: 'On-site installation, team supervision, connection verification, and functional testing to ensure flawless commissioning.'
-                },
-                {
-                    icon: 'fas fa-robot',
-                    title: 'Commissioning & Programming',
-                    description: 'Programming of robots, PLCs, and systems, with on-site or remote commissioning.',
-                    details: 'Configuration of industrial robots, PLC programming for specific cycles, and commissioning with real-time testing.'
-                },
-                {
-                    icon: 'fas fa-shield-alt',
-                    title: 'Safety & Electrical Compliance',
-                    description: 'Instrument calibration, signal integrity, electrical safety, and compliance with industrial standards.',
-                    details: 'Electrical safety testing, 4-20mA signal verification, IEC standards compliance, and commissioning report.'
-                }
-            ],
-            'formation': [
-                {
-                    icon: 'fas fa-chalkboard-teacher',
-                    title: 'Basic Training for Operators',
-                    description: 'Practical courses for operators on the use of PLCs and HMI interfaces.',
-                    details: 'Practical workshops on HMI interface usage, alarm management, and basic troubleshooting on Siemens or Schneider PLCs.'
-                },
-                {
-                    icon: 'fas fa-graduation-cap',
-                    title: 'Specialized Professional Training',
-                    description: 'Advanced programs for engineers on PLC programming, SCADA, and maintenance.',
-                    details: 'In-depth courses on IEC 61131-3 programming, SCADA configuration, and preventive maintenance strategies.'
-                },
-                {
-                    icon: 'fas fa-laptop-code',
-                    title: 'Online / Offline Training',
-                    description: 'Flexible automation and instrumentation training, available online or in-person.',
-                    details: 'Interactive online modules with videos and quizzes, or in-person sessions with real equipment simulations.'
-                }
-            ],
-            'maintenance': [
-                {
-                    icon: 'fas fa-wrench',
-                    title: 'Maintenance of Industrial Electrical Installations',
-                    description: 'Preventive and corrective maintenance to ensure the reliability of industrial electrical systems.',
-                    details: 'Regular system inspections, fault diagnosis, replacement of defective components, and energy consumption optimization.'
-                },
-                {
-                    icon: 'fas fa-tools',
-                    title: 'Calibration of Sensors, Transmitters, and Actuators',
-                    description: 'Precise calibration of instruments to ensure optimal performance in industrial processes.',
-                    details: 'On-site or workshop calibration, adjustment of pressure and temperature sensors, and verification of 4-20mA transmitters.'
-                },
-                {
-                    icon: 'fas fa-cogs',
-                    title: 'Configuration of Instruments for Industrial Applications',
-                    description: 'Configuration of instruments to meet the specific requirements of industrial applications.',
-                    details: 'Configuration of instruments for specific applications like flow control or temperature regulation, with performance testing.'
-                }
-            ]
-        };
+        let cart = [];
+        let total = 0;
 
-        // Gestion de la langue
-        const lang = localStorage.getItem('language') || 'en';
-        const languageToggle = document.getElementById('language-toggle');
-
-        if (lang === 'fr') {
-            // Si la langue est le français, mettre à jour tout le contenu en français
-            document.documentElement.lang = 'fr';
-            document.title = 'AutoTech Solutions - Expert en Automatisme & Instrumentation';
-            document.querySelector('meta[name="description"]').setAttribute('content', 'Solutions en automatisme et instrumentation pour l’industrie : conception, fourniture, installation, formation et maintenance.');
-
-            // En-tête
-            document.querySelector('header h1').textContent = 'AutoTech Solutions';
-            document.querySelector('header p').textContent = 'Vos solutions pour l’industrie : fourniture, installation, formation, maintenance';
-            document.querySelector('header a').textContent = 'Découvrir mes services';
-            document.querySelector('header a').setAttribute('aria-label', 'Découvrir les services d’automatisme et d’instrumentation');
-
-            // Navigation
-            document.querySelector('nav').setAttribute('aria-label', 'Menu principal');
-            document.querySelector('nav a[href="#home"]').innerHTML = '<i class="fas fa-home" aria-hidden="true"></i> Accueil';
-            document.querySelector('nav a[href="#home"]').setAttribute('aria-label', 'Aller à la section Accueil');
-            document.querySelector('nav a[href="#services"]').innerHTML = '<i class="fas fa-tools" aria-hidden="true"></i> Services';
-            document.querySelector('nav a[href="#services"]').setAttribute('aria-label', 'Aller à la section Services');
-            document.querySelector('nav a[href="#about"]').innerHTML = '<i class="fas fa-user" aria-hidden="true"></i> À propos';
-            document.querySelector('nav a[href="#about"]').setAttribute('aria-label', 'Aller à la section À propos');
-            document.querySelector('nav a[href="#contact"]').innerHTML = '<i class="fas fa-envelope" aria-hidden="true"></i> Contact';
-            document.querySelector('nav a[href="#contact"]').setAttribute('aria-label', 'Aller à la section Contact');
-            document.querySelector('.dropdown-item[data-tab="etude-solution"]').textContent = 'Étude et Solution';
-            document.querySelector('.dropdown-item[data-tab="fournitures"]').textContent = 'Fournitures et Matériel';
-            document.querySelector('.dropdown-item[data-tab="installation"]').textContent = 'Installation, Tests et Mise en Service';
-            document.querySelector('.dropdown-item[data-tab="formation"]').textContent = 'Formation et Entraînement';
-            document.querySelector('.dropdown-item[data-tab="maintenance"]').textContent = 'Maintenance';
-            document.querySelector('a[href="#qui-nous-sommes"]').textContent = 'Qui nous sommes';
-            document.querySelector('a[href="#industries"]').textContent = 'Industries que nous servons';
-            languageToggle.innerHTML = '<i class="fas fa-globe" aria-hidden="true"></i> English';
-            languageToggle.setAttribute('aria-label', 'Switch to English language');
-
-            // Section Home
-            document.querySelector('#home h2').textContent = 'Accueil';
-            document.querySelector('#home p').textContent = 'Ingénieur automaticien passionné, je propose des solutions complètes pour l’industrie : de la fourniture de matériel à la mise en service, en passant par la formation et la maintenance. Cliquez ci-dessous pour explorer mes services.';
-
-            // Section Services
-            document.querySelector('#services h2').textContent = 'Services';
-            document.querySelector('.service-card[data-tab="etude-solution"] h3').textContent = 'Étude et Solution';
-            document.querySelector('.service-card[data-tab="etude-solution"] p').textContent = 'Conception, programmation et optimisation.';
-            document.querySelector('.service-card[data-tab="fournitures"] h3').textContent = 'Fournitures et Matériel';
-            document.querySelector('.service-card[data-tab="fournitures"] p').textContent = 'Équipements et logiciels industriels.';
-            document.querySelector('.service-card[data-tab="installation"] h3').textContent = 'Installation et Mise en Service';
-            document.querySelector('.service-card[data-tab="installation"] p').textContent = 'Mise en place et validation.';
-            document.querySelector('.service-card[data-tab="formation"] h3').textContent = 'Formation et Entraînement';
-            document.querySelector('.service-card[data-tab="formation"] p').textContent = 'Formations pour opérateurs et ingénieurs.';
-            document.querySelector('.service-card[data-tab="maintenance"] h3').textContent = 'Maintenance';
-            document.querySelector('.service-card[data-tab="maintenance"] p').textContent = 'Entretien et calibrage.';
-
-            // Section About
-            document.querySelector('#about h2').textContent = 'À propos';
-            document.querySelector('#qui-nous-sommes').textContent = 'Qui nous sommes';
-            document.querySelector('#about p').textContent = 'Nous sommes une entreprise spécialisée dans les solutions d’automatisme et d’instrumentation pour l’industrie. Nous offrons des services complets allant de la conception et la programmation à la mise en service, la maintenance, et la formation, en mettant l’accent sur l’innovation et la fiabilité.';
-            document.querySelector('#industries').textContent = 'Industries que nous servons';
-            document.querySelectorAll('.industry-card p')[0].textContent = 'Pétrole et gaz';
-            document.querySelectorAll('.industry-card p')[1].textContent = 'Énergie (électricité, renouvelables)';
-            document.querySelectorAll('.industry-card p')[2].textContent = 'Automobile';
-            document.querySelectorAll('.industry-card p')[3].textContent = 'Agroalimentaire';
-            document.querySelectorAll('.industry-card p')[4].textContent = 'Pharmaceutique';
-            document.querySelectorAll('.industry-card p')[5].textContent = 'Fabrication industrielle';
-            document.querySelectorAll('.industry-card p')[6].textContent = 'Industriel métallique';
-            document.querySelectorAll('.industry-card p')[7].textContent = 'Robotique';
-
-            // Section Contact
-            document.querySelector('#contact h2').textContent = 'Contact';
-            document.querySelector('#contact p:nth-child(2)').innerHTML = 'Contactez-moi : <a href="mailto:ton.email@example.com" aria-label="Envoyer un email à AutoTech Solutions">ton.email@example.com</a>';
-            document.querySelector('#contact p:nth-child(3)').innerHTML = 'Téléphone : <a href="tel:+336XXXXXXXX" aria-label="Appeler AutoTech Solutions au +33 6 XX XX XX XX">+33 6 XX XX XX XX</a>';
-            document.querySelector('#contact p:nth-child(4)').innerHTML = 'Ou via <a href="https://linkedin.com/in/tonprofil" target="_blank" aria-label="Visiter le profil LinkedIn d’AutoTech Solutions">LinkedIn</a>';
-
-            // Footer
-            document.querySelector('footer p').textContent = '© 2025 - AutoTech Solutions';
-
-            // Modale
-            document.querySelector('.modal-close').setAttribute('aria-label', 'Fermer la modale');
-
-            // Mettre à jour les sous-services en français
-            subServicesData['etude-solution'] = [
-                { icon: 'fas fa-drafting-compass', title: 'Conception Électrique & Schémas', description: 'Études techniques, conception de panneaux + schémas électriques conformes aux normes industrielles.', details: 'Analyse des besoins, création de schémas détaillés avec logiciels comme AutoCAD, conformité aux normes IEC, et validation avec le client.' },
-                { icon: 'fas fa-code', title: 'Programmation & Intégration', description: 'Développement de systèmes automatisés (PLC, SCADA, DCS...), logique de contrôle et intégration des équipements de terrain.', details: 'Programmation sur Siemens, Rockwell, ou Schneider, intégration de capteurs et actionneurs, tests de logique de contrôle, et mise en œuvre de protocoles comme Modbus ou OPC.' },
-                { icon: 'fas fa-chart-line', title: 'Optimisation & Documentation', description: 'Optimisation des performances (PID, logique), dispositions de câbles et élaboration des fiches techniques.', details: 'Ajustement des boucles PID, optimisation des temps de cycle, rédaction de manuels techniques détaillés, et plans de câblage pour une maintenance simplifiée.' }
-            ];
-            subServicesData['fournitures'] = [
-                { icon: 'fas fa-boxes', title: 'Fourniture de matériel et de logiciels', description: 'Approvisionnement en automates programmables (PLC), logiciels SCADA, et composants industriels conformes aux normes IEC 61131-3.', details: 'Sélection de matériel auprès de fournisseurs certifiés (Siemens, Rockwell), livraison rapide, et compatibilité garantie avec vos systèmes existants.' },
-                { icon: 'fas fa-charging-station', title: 'Fourniture de panneaux selon les normes', description: 'Livraison de panneaux électriques certifiés pour applications industrielles, respectant les normes de sécurité et de qualité.', details: 'Panneaux assemblés sur mesure, certifiés IP65, avec tests de conformité avant livraison, et documentation complète.' },
-                { icon: 'fas fa-tachometer-alt', title: 'Fourniture d’instruments de processus', description: 'Capteurs, transmetteurs et actionneurs pour la mesure et le contrôle des processus industriels.', details: 'Fourniture de capteurs de pression, température et débit, transmetteurs 4-20mA, et actionneurs pneumatiques ou électriques.' }
-            ];
-            subServicesData['installation'] = [
-                { icon: 'fas fa-plug', title: 'Installation & Supervision', description: 'Mise en place, essais et supervision des panneaux, équipements, et câblage selon les normes.', details: 'Installation sur site, supervision des équipes, vérification des connexions, et tests fonctionnels pour garantir une mise en service sans faille.' },
-                { icon: 'fas fa-robot', title: 'Mise en Service & Programmation', description: 'Programmation de robots, automates et systèmes, avec mise en service sur site ou à distance.', details: 'Configuration des robots industriels, programmation des automates pour des cycles spécifiques, et mise en service avec tests en temps réel.' },
-                { icon: 'fas fa-shield-alt', title: 'Sécurité & Conformité Électrique', description: 'Calibrage des instruments, intégrité des signaux, sécurité électrique et conformité aux normes industrielles.', details: 'Tests de sécurité électrique, vérification des signaux 4-20mA, conformité aux normes IEC, et rapport de mise en service.' }
-            ];
-            subServicesData['formation'] = [
-                { icon: 'fas fa-chalkboard-teacher', title: 'Formation de base pour les opérateurs', description: 'Cours pratiques pour les opérateurs sur l’utilisation des automates et interfaces HMI.', details: 'Ateliers pratiques sur l’utilisation des interfaces HMI, gestion des alarmes, et dépannage de base sur automates Siemens ou Schneider.' },
-                { icon: 'fas fa-graduation-cap', title: 'Formation professionnelle spécialisée', description: 'Programmes avancés pour ingénieurs sur la programmation PLC, SCADA et maintenance.', details: 'Cours approfondis sur la programmation IEC 61131-3, configuration SCADA, et stratégies de maintenance préventive.' },
-                { icon: 'fas fa-laptop-code', title: 'Formation en ligne / hors ligne', description: 'Formations flexibles en automatisme et instrumentation, disponibles en ligne ou en présentiel.', details: 'Modules interactifs en ligne avec vidéos et quiz, ou sessions en présentiel avec simulations sur matériel réel.' }
-            ];
-            subServicesData['maintenance'] = [
-                { icon: 'fas fa-wrench', title: 'Maintenance des installations électriques industrielles', description: 'Maintenance préventive et corrective pour assurer la fiabilité des systèmes électriques industriels.', details: 'Inspection régulière des systèmes, diagnostic des pannes, remplacement des composants défectueux, et optimisation de la consommation énergétique.' },
-                { icon: 'fas fa-tools', title: 'Calibration of Sensors, Transmitters, and Actuators', description: 'Precise calibration of instruments to ensure optimal performance in industrial processes.', details: 'On-site or workshop calibration, adjustment of pressure and temperature sensors, and verification of 4-20mA transmitters.' },
-                { icon: 'fas fa-cogs', title: 'Configuration of Instruments for Industrial Applications', description: 'Configuration of instruments to meet the specific requirements of industrial applications.', details: 'Configuration of instruments for specific applications like flow control or temperature regulation, with performance testing.' }
-            ];
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            total += price;
+            updateCart();
         }
 
-        // Restaurer la position de défilement après rechargement, mais seulement si c'est un changement de langue
-        window.addEventListener('load', () => {
-            const isLanguageChange = localStorage.getItem('isLanguageChange') === 'true';
-            const savedScrollPosition = localStorage.getItem('scrollPosition');
+        function removeFromCart(index) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            updateCart();
+        }
 
-            if (isLanguageChange && savedScrollPosition) {
-                // Si le rechargement provient d’un changement de langue, restaurer la position
-                window.scrollTo(0, parseInt(savedScrollPosition));
+        function updateCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center mb-2';
+                li.innerHTML = `
+                    ${item.product} - ${item.price.toFixed(2)} €
+                    <button onclick="removeFromCart(${index})" class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700">Supprimer</button>
+                `;
+                cartElement.appendChild(li);
+            });
+            document.getElementById('total').textContent = `Total : ${total.toFixed(2)} €`;
+        }
+
+        function filterProducts() {
+            const category = document.getElementById('category').value;
+            const priceSort = document.getElementById('price').value;
+            const products = document.querySelectorAll('.product');
+
+            // Filtrer par catégorie
+            products.forEach(product => {
+                const productCategory = product.dataset.category;
+                if (category === 'all' || productCategory === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Trier par prix
+            const productList = document.getElementById('product-list');
+            const productArray = Array.from(products);
+            if (priceSort !== 'default') {
+                productArray.sort((a, b) => {
+                    const priceA = parseFloat(a.dataset.price);
+                    const priceB = parseFloat(b.dataset.price);
+                    return priceSort === 'low-to-high' ? priceA - priceB : priceB - priceA;
+                });
+                productList.innerHTML = '';
+                productArray.forEach(product => productList.appendChild(product));
+            }
+        }
+
+        function checkout() {
+            if (cart.length > 0) {
+                alert('Commande finalisée avec succès ! Total : ' + total.toFixed(2) + ' €');
+                cart = [];
+                total = 0;
+                updateCart();
             } else {
-                // Sinon (entrée sur le site ou rafraîchissement manuel), commencer en haut
-                window.scrollTo(0, 0);
+                alert('Votre panier est vide.');
             }
-
-            // Nettoyer les clés après restauration
-            localStorage.removeItem('scrollPosition');
-            localStorage.removeItem('isLanguageChange');
-        });
-
-        // Gestion du bouton de permutation de langue
-        languageToggle.addEventListener('click', () => {
-            // Sauvegarder la position de défilement avant de recharger
-            localStorage.setItem('scrollPosition', window.scrollY);
-            // Indiquer que ce rechargement est dû à un changement de langue
-            localStorage.setItem('isLanguageChange', 'true');
-
-            // Changer la langue
-            const newLang = lang === 'en' ? 'fr' : 'en';
-            localStorage.setItem('language', newLang);
-            location.reload();
-        });
-
-        // Navigation dynamique
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Gestion des sous-menus pour l'accessibilité
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.setAttribute('aria-expanded', 'true');
-            });
-            item.addEventListener('mouseleave', () => {
-                item.setAttribute('aria-expanded', 'false');
-            });
-            item.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const isExpanded = item.getAttribute('aria-expanded') === 'true';
-                    item.setAttribute('aria-expanded', !isExpanded);
-                }
-            });
-        });
-
-        // Onglets services (cartes)
-        const serviceCards = document.querySelectorAll('.service-card');
-        const dropdownItems = document.querySelectorAll('.dropdown-item');
-        const selectedServiceContainer = document.getElementById('selected-service-container');
-
-        function updateServiceDisplay(selectedCard) {
-            // Réinitialiser les classes actives
-            serviceCards.forEach(c => c.classList.remove('active'));
-            dropdownItems.forEach(item => item.classList.remove('active'));
-
-            // Activer la carte sélectionnée
-            selectedCard.classList.add('active');
-
-            // Mettre à jour selected-service-container
-            selectedServiceContainer.innerHTML = '';
-            selectedServiceContainer.classList.add('active');
-            const selectedCardClone = selectedCard.cloneNode(true);
-            selectedCardClone.classList.add('active');
-            selectedCardClone.setAttribute('tabindex', '0');
-            selectedCardClone.setAttribute('role', 'button');
-            selectedServiceContainer.appendChild(selectedCardClone);
-
-            // Ajouter les sous-services dynamiquement
-            const tab = selectedCard.dataset.tab;
-            const subServices = subServicesData[tab];
-            if (subServices) {
-                const contentDiv = document.createElement('div');
-                contentDiv.classList.add('services-content', 'active');
-                const gridDiv = document.createElement('div');
-                gridDiv.classList.add('services-grid');
-                subServices.forEach(service => {
-                    const serviceDiv = document.createElement('div');
-                    serviceDiv.classList.add('service');
-                    serviceDiv.setAttribute('role', 'button');
-                    serviceDiv.setAttribute('tabindex', '0');
-                    serviceDiv.dataset.details = service.details;
-                    serviceDiv.innerHTML = `
-                        <i class="${service.icon}" aria-hidden="true"></i>
-                        <h3>${service.title}</h3>
-                        <p>${service.description}</p>
-                    `;
-                    gridDiv.appendChild(serviceDiv);
-                });
-                contentDiv.appendChild(gridDiv);
-                selectedServiceContainer.appendChild(contentDiv);
-            }
-
-            // Activer le lien correspondant dans la barre de navigation
-            const activeTab = selectedCard.dataset.tab;
-            const correspondingDropdownItem = document.querySelector(`.dropdown-item[data-tab="${activeTab}"]`);
-            if (correspondingDropdownItem) {
-                correspondingDropdownItem.classList.add('active');
-            }
-
-            // Ajouter les écouteurs pour la modale après la création des sous-services
-            addModalListeners();
-
-            // Faire défiler automatiquement vers selected-service-container
-            document.querySelector('#selected-service-container').scrollIntoView({ behavior: 'smooth' });
         }
 
-        serviceCards.forEach(card => {
-            card.addEventListener('click', () => {
-                updateServiceDisplay(card);
-            });
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    updateServiceDisplay(card);
-                }
-            });
-        });
-
-        // Synchroniser la barre de navigation au clic sur les liens du sous-menu
-        dropdownItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                const tab = item.dataset.tab;
-
-                // Trouver la carte correspondante
-                const correspondingCard = document.querySelector(`.service-card[data-tab="${tab}"]`);
-                if (correspondingCard) {
-                    updateServiceDisplay(correspondingCard);
-
-                    // Faire défiler jusqu'à selected-service-container
-                    document.querySelector('#selected-service-container').scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Gestion de la modale pour les détails des sous-services
-        let lastFocusedElement = null;
-        function addModalListeners() {
-            const services = document.querySelectorAll('.service');
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const overlay = document.getElementById('overlay');
-            const modalClose = document.querySelector('.modal-close');
-
-            services.forEach(service => {
-                service.addEventListener('click', () => {
-                    openModal(service);
-                });
-                service.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openModal(service);
-                    }
-                });
-            });
-
-            function openModal(service) {
-                // Sauvegarder l'élément qui a ouvert la modale
-                lastFocusedElement = document.activeElement;
-
-                // Remplir la modale avec les détails
-                const title = service.querySelector('h3').textContent;
-                const details = service.dataset.details;
-                modalTitle.textContent = title;
-                modalContent.textContent = details;
-
-                // Afficher la modale et l'overlay
-                modal.classList.add('active');
-                overlay.classList.add('active');
-
-                // Déplacer le focus sur la modale
-                modalClose.focus();
+        function recharge() {
+            const operator = document.getElementById('operator').value;
+            const amount = document.getElementById('amount').value;
+            const phone = document.getElementById('phone').value;
+            if (amount && phone) {
+                alert(`Rechargement de ${amount} € pour ${operator} sur le numéro ${phone} effectué avec succès !`);
+            } else {
+                alert('Veuillez remplir tous les champs.');
             }
-
-            // Fermer la modale
-            function closeModal() {
-                modal.classList.remove('active');
-                overlay.classList.remove('active');
-
-                // Restaurer le focus sur l'élément qui a ouvert la modale
-                if (lastFocusedElement) {
-                    lastFocusedElement.focus();
-                }
-            }
-
-            // Fermer la modale en cliquant sur l'overlay
-            overlay.addEventListener('click', closeModal);
-
-            // Fermer la modale avec le bouton de fermeture
-            modalClose.addEventListener('click', closeModal);
-
-            // Fermer la modale avec la touche Échap
-            modal.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeModal();
-                }
-            });
-
-            // Piéger le focus dans la modale
-            const focusableElements = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
-            const firstFocusableElement = focusableElements[0];
-            const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-            modal.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) { // Shift + Tab
-                        if (document.activeElement === firstFocusableElement) {
-                            e.preventDefault();
-                            lastFocusableElement.focus();
-                        }
-                    } else { // Tab
-                        if (document.activeElement === lastFocusableElement) {
-                            e.preventDefault();
-                            firstFocusableElement.focus();
-                        }
-                    }
-                }
-            });
         }
 
-        // Appeler updateServiceDisplay pour l'état initial (Étude et Solution est actif par défaut)
-        const initialCard = document.querySelector('.service-card.active');
-        updateServiceDisplay(initialCard);
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            if (name && email && message) {
+                alert('Message envoyé avec succès !');
+            } else {
+                alert('Veuillez remplir tous les champs.');
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function scrollToExample(exampleId) {
+            showPage('home');
+            const element = document.getElementById(exampleId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
     </script>
 </body>
 </html>
